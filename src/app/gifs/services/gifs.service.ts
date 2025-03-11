@@ -6,9 +6,11 @@ import { Gif } from '../interfaces/gif.interface';
 import { GifMapper } from '../mapper/gif.mapper';
 import { map, tap, } from 'rxjs';
 
+const GIF_KEY = 'gifs'
+
 
 const loadFromLocalStorage = () => {
-    const gifsFromLocalStorage = localStorage.getItem('gifs') ?? '{}'
+    const gifsFromLocalStorage = localStorage.getItem(GIF_KEY) ?? '{}'
     const gifs = JSON.parse(gifsFromLocalStorage)
 
     return gifs
@@ -31,7 +33,7 @@ export class GifService {
 
     saveGifsToLocalStorage = effect(() => {
         const historyString = JSON.stringify(this.searchHistory())
-        localStorage.setItem('Gifs', historyString)
+        localStorage.setItem(GIF_KEY, historyString)
     })
 
     loadTrendingGifs() {
